@@ -35,14 +35,14 @@
                     <option value="a8">엔젤윙부츠</option>
                     <option value="a9">파워윙부츠</option>
                     <option value="a10">썬더윙부츠</option>
-                    <option value="a11">루나윙부츠</option>
-                    <option value="a12">쏠라윙부츠</option>
-                    <option value="a13">스텔라윙부츠</option>
-                    <option value="a14">갤럭시윙부츠</option>
-                    <option value="a15">홀리윙부츠</option>
-                    <option value="a16">프라우드윙부츠</option>
-                    <option value="a17">크로노스윙부츠</option>
-                    <option value="a18">인페르노윙부츠</option>
+                    <option class="hero" value="a11">루나윙부츠</option>
+                    <option class="hero" value="a12">쏠라윙부츠</option>
+                    <option class="hero" value="a13">스텔라윙부츠</option>
+                    <option class="hero" value="a14">갤럭시윙부츠</option>
+                    <option class="grand" value="a15">홀리윙부츠</option>
+                    <option class="grand" value="a16">프라우드윙부츠</option>
+                    <option class="eternal" value="a17">크로노스윙부츠</option>
+                    <option class="eternal" value="a18">인페르노윙부츠</option>
                 </select>
                 <input type="number" placeholder="퍼센트" id="lvlPer" min="0" max="100" step="0.01" value="0">%
             </div>
@@ -68,14 +68,14 @@
                     <option value="b8">엔젤윙부츠</option>
                     <option value="b9">파워윙부츠</option>
                     <option value="b10">썬더윙부츠</option>
-                    <option value="b11">루나윙부츠</option>
-                    <option value="b12">쏠라윙부츠</option>
-                    <option value="b13">스텔라윙부츠</option>
-                    <option value="b14">갤럭시윙부츠</option>
-                    <option value="b15">홀리윙부츠</option>
-                    <option value="b16">프라우드윙부츠</option>
-                    <option value="b17">크로노스윙부츠</option>
-                    <option value="b18">인페르노윙부츠</option>
+                    <option class="hero" value="b11">루나윙부츠</option>
+                    <option class="hero" value="b12">쏠라윙부츠</option>
+                    <option class="hero" value="b13">스텔라윙부츠</option>
+                    <option class="hero" value="b14">갤럭시윙부츠</option>
+                    <option class="grand" value="b15">홀리윙부츠</option>
+                    <option class="grand" value="b16">프라우드윙부츠</option>
+                    <option class="eternal" value="b17">크로노스윙부츠</option>
+                    <option class="eternal" value="b18">인페르노윙부츠</option>
                 </select>
             </div>
             <br>
@@ -183,7 +183,15 @@
                 return;
             }
 
-            neededExpSpan.textContent = `필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()} EXP`;
+            const selA = document.getElementById("selA");
+            const selALvl = document.getElementById("selALvl");
+            const selB = document.getElementById("selB");
+            const selBLvl = document.getElementById("selBLvl");
+            const selAText = selA.options[selA.selectedIndex].text;
+            const selALvlText = selALvl.options[selALvl.selectedIndex].text;
+            const selBText = selB.options[selB.selectedIndex].text;
+            const selBLvlText = selALvl.options[selBLvl.selectedIndex].text;
+            neededExpSpan.textContent = `${selAText} ${selALvlText}에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()} 경험치가 필요해요!`;
         }
 
         sel_A_Color.addEventListener('change', updateExpNeeded);
@@ -210,6 +218,7 @@
 
         h1 {
             font-size: 35px;
+            text-align: center;
         }
 
         html,
@@ -235,6 +244,17 @@
             margin-top: 10px;
         }
 
+        .hero {
+            color: red;
+        }
+
+        .grand {
+            color: #4169E1;
+        }
+
+        .eternal {
+            color: #47C83E
+        }
 
         .mains {
             position: relative;
@@ -252,6 +272,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 40%;
         }
     </style>
 </body>
