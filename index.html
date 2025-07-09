@@ -192,7 +192,24 @@
             const selBText = selB.options[selB.selectedIndex].text;
             const selBLvlText = selALvl.options[selBLvl.selectedIndex].text;
             const selAPer = sel_A_Per.value;
-            neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()} 경험치가 필요해요!`;
+
+            function koUnits(num) {
+                const units = [
+                    { value: 1e8, label: '억' },
+                    { value: 1e4, label: '만' }
+                ];
+
+                for (const unit of units) {
+                    if (num >= unit.value) {
+                        const short = (num / unit.value).toFixed(1);
+                        const clean = parseFloat(short);
+                        return `약 ${clean}${unit.label}`;
+                    }
+                }
+                return `약 ${num.toLocaleString()}`;
+            }
+
+            neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
         }
 
         sel_A_Color.addEventListener('change', updateExpNeeded);
