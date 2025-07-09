@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테일즈런너 레벨업 계산기</title>
+</head>
+
+<body>
+    <!--React나 Next로 만들면 쉽기야 하겠는데 그러면 동적웹페이지 호스팅을 못해서 그냥 깡 html로 만듦..-->
+    <h1>테일즈런너 레벨업 계산기</h1>
+    <h3 style="color: #909090;">만든놈: 사큐</h3>
+    <div id="cul">현재 레벨</div>
+    <select name="색상" id="selA">
+        <option value="a_red">빨간색</option>
+        <option value="a_orange">주황색</option>
+        <option value="a_yellow">노란색</option>
+        <option value="a_green">초록색</option>
+        <option value="a_blue">파란색</option>
+        <option value="a_darkblue">남색</option>
+        <option value="a_purple">보라색</option>
+    </select>
+    <select name="레벨" id="selALvl">
+        <option value="a1">병아리</option>
+        <option value="a2">발바닥</option>
+        <option value="a3">양말</option>
+        <option value="a4">슬리퍼</option>
+        <option value="a5">운동화</option>
+        <option value="a6">윙부츠</option>
+        <option value="a7">데빌윙부츠</option>
+        <option value="a8">엔젤윙부츠</option>
+        <option value="a9">파워윙부츠</option>
+        <option value="a10">썬더윙부츠</option>
+        <option value="a11">루나윙부츠</option>
+        <option value="a12">쏠라윙부츠</option>
+        <option value="a13">스텔라윙부츠</option>
+        <option value="a14">갤럭시윙부츠</option>
+        <option value="a15">홀리윙부츠</option>
+        <option value="a16">프라우드윙부츠</option>
+        <option value="a17">크로노스윙부츠</option>
+        <option value="a18">인페르노윙부츠</option>
+    </select>
+    <input type="number" placeholder="퍼센트" id="lvlPer" min="0" max="100" step="0.01" value="0">%
+    <div id="tal">목표 레벨</div>
+    <select name="색상" id="selB">
+        <option value="b_red">빨간색</option>
+        <option value="b_orange">주황색</option>
+        <option value="b_yellow">노란색</option>
+        <option value="b_green">초록색</option>
+        <option value="b_blue">파란색</option>
+        <option value="b_darkblue">남색</option>
+        <option value="b_purple">보라색</option>
+    </select>
+    <select name="레벨" id="selBLvl">
+        <option value="b1">병아리</option>
+        <option value="b2">발바닥</option>
+        <option value="b3">양말</option>
+        <option value="b4">슬리퍼</option>
+        <option value="b5">운동화</option>
+        <option value="b6">윙부츠</option>
+        <option value="b7">데빌윙부츠</option>
+        <option value="b8">엔젤윙부츠</option>
+        <option value="b9">파워윙부츠</option>
+        <option value="b10">썬더윙부츠</option>
+        <option value="b11">루나윙부츠</option>
+        <option value="b12">쏠라윙부츠</option>
+        <option value="b13">스텔라윙부츠</option>
+        <option value="b14">갤럭시윙부츠</option>
+        <option value="b15">홀리윙부츠</option>
+        <option value="b16">프라우드윙부츠</option>
+        <option value="b17">크로노스윙부츠</option>
+        <option value="b18">인페르노윙부츠</option>
+    </select>
+    <div id="te1"></div>
+    <br>
+    <div id="requiredExperience">필요 경험치: </div>
+
+    <!--스크립트 구역-->
+    <script>
+        let LEVELEXP = [[0, 25, 75, 150, 250, 350, 450], //병아리
+        [600, 800, 1000, 1200, 1400, 1600, 1800], //발바닥
+        [2000, 2500, 3000, 3750, 4500, 5500, 6500], //양말
+        [7500, 9500, 11500, 14500, 17500, 21500, 25500], //슬리퍼
+        [29500, 34500, 39500, 47000, 54500, 69500, 84500], //운동화
+        [99500, 124500, 149500, 199500, 249500, 299500, 399500], //윙부츠
+        [499500, 649500, 799500, 999500, 1199500, 1433700, 1683700], //데빌윙부츠
+        [2283700, 2883700, 3483700, 4083700, 4683700, 5283700, 5883700], //엔젤윙부츠
+        [7983700, 10083700, 12183700, 14283700, 16383700, 18483700, 20583700], //파워윙부츠
+        [25383700, 30183700, 34983700, 39783700, 44583700, 49383700, 54183700], //썬더윙부츠
+        [64983700, 75783700, 86583700, 97383700, 108183700, 118983700, 129783700], //루나윙부츠
+        [153783700, 177783700, 201783700, 225783700, 249783700, 273783700, 297783700], //쏠라윙부츠
+        [345783700, 393783700, 441783700, 489783700, 537783700, 585783700, 633783700], //스텔라윙부츠
+        [729783700, 825783700, 921783700, 1017783700, 1113783700, 1209783700, 1305783700], //갤럭시윙부츠
+        [1545783700, 1785783700, 2025783700, 2265783700, 2505783700, 2745783700, 2985783700], //홀리윙부츠
+        [3585783700, 4185783700, 4785783700, 5385783700, 5985783700, 6585783700, 7185783700], //프라우드윙부츠
+        [9341518810, 10555916255, 11928185368, 13478849466, 15231099897, 17211142883, 19448591458], //크로노스윙부츠
+        [25283168896, 28569980852, 32284078363, 36481008550, 41223539662, 46582599818, 52638337794]]; //인페르노윙부츠
+
+        const sel_A_Color = document.getElementById('selA');
+        const sel_B_Color = document.getElementById('selB');
+        const sel_A_Lvl = document.getElementById('selALvl');
+        const sel_B_Lvl = document.getElementById('selBLvl');
+        const sel_A_Per = document.getElementById('lvlPer');
+
+        const colorIndex = {
+            a_red: 0,
+            b_red: 0,
+            a_orange: 1,
+            b_orange: 1,
+            a_yellow: 2,
+            b_yellow: 2,
+            a_green: 3,
+            b_green: 3,
+            a_blue: 4,
+            b_blue: 4,
+            a_darkblue: 5,
+            b_darkblue: 5,
+            a_purple: 6,
+            b_purple: 6
+        };
+
+        function calculateCurLvl(colorValue, lvlValue) {
+            const colorIdx = colorIndex[colorValue];
+            const lvlNum = parseInt(lvlValue.replace(/[ab]/g, ''), 10);
+            if (isNaN(colorIdx) || isNaN(lvlNum)) return null;
+
+            return { levelIdx: lvlNum - 1, colorIdx };
+        }
+
+        function calculateExpNeeded(curPos, curPercent, tarPos) {
+            const { levelIdx: curLevelIdx, colorIdx: curColorIdx } = curPos;
+            const { levelIdx: tarLevelIdx, colorIdx: tarColorIdx } = tarPos;
+
+            if (
+                curLevelIdx < 0 || curLevelIdx >= LEVELEXP.length ||
+                tarLevelIdx < 0 || tarLevelIdx >= LEVELEXP.length ||
+                curColorIdx < 0 || curColorIdx >= 7 ||
+                tarColorIdx < 0 || tarColorIdx >= 7 ||
+                curPercent < 0 || curPercent > 100
+            ) return null;
+
+            if (
+                curLevelIdx > tarLevelIdx ||
+                (curLevelIdx === tarLevelIdx && curColorIdx >= tarColorIdx)
+            ) return 0;
+
+            const curMinExp = LEVELEXP[curLevelIdx][curColorIdx];
+            const nextExp = curColorIdx < 6
+                ? LEVELEXP[curLevelIdx][curColorIdx + 1]
+                : (curLevelIdx < LEVELEXP.length - 1 ? LEVELEXP[curLevelIdx + 1][0] : curMinExp);
+
+            const curExp = curMinExp + (curPercent / 100) * (nextExp - curMinExp);
+
+            const tarExp = LEVELEXP[tarLevelIdx][tarColorIdx];
+
+            return tarExp - curExp;
+        }
+
+        const neededExpSpan = document.getElementById('requiredExperience');
+
+        function updateExpNeeded() {
+            const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
+            const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
+            const curPercent = parseFloat(sel_A_Per.value);
+
+            if (curPos === null || tarPos === null || isNaN(curPercent)) {
+                neededExpSpan.textContent = "입력값이 잘못되었습니다.";
+                return;
+            }
+
+            const expNeeded = calculateExpNeeded(curPos, curPercent, tarPos);
+            if (expNeeded === null) {
+                neededExpSpan.textContent = "계산에 문제가 발생했습니다.";
+                return;
+            }
+
+            neededExpSpan.textContent = `필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()}`;
+        }
+
+        sel_A_Color.addEventListener('change', updateExpNeeded);
+        sel_A_Lvl.addEventListener('change', updateExpNeeded);
+        sel_A_Per.addEventListener('input', updateExpNeeded);
+
+        sel_B_Color.addEventListener('change', updateExpNeeded);
+        sel_B_Lvl.addEventListener('change', updateExpNeeded);
+
+        updateExpNeeded();
+
+    </script>
+</body>
+
+</html>
