@@ -146,7 +146,7 @@
                 tarLevelIdx < 0 || tarLevelIdx >= LEVELEXP.length ||
                 curColorIdx < 0 || curColorIdx >= 7 ||
                 tarColorIdx < 0 || tarColorIdx >= 7 ||
-                curPercent < 0 || curPercent > 100
+                curPercent < 0 || curPercent > 99.99
             ) return null;
 
             if (
@@ -181,7 +181,7 @@
 
             const expNeeded = calculateExpNeeded(curPos, curPercent, tarPos);
             if (expNeeded === null) {
-                neededExpSpan.textContent = "0부터 100까지의 수를 입력해주세요!";
+                neededExpSpan.textContent = "0부터 99.99까지의 수를 입력해주세요!";
                 return;
             }
 
