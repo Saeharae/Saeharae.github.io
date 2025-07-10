@@ -127,7 +127,8 @@
             a_purple: 6,
             b_purple: 6
         };
-
+        
+        //선택한 레벨을 숫자로 변환
         function calculateCurLvl(colorValue, lvlValue) {
             const colorIdx = colorIndex[colorValue];
             const lvlNum = parseInt(lvlValue.replace(/[ab]/g, ''), 10);
@@ -136,6 +137,7 @@
             return { levelIdx: lvlNum - 1, colorIdx };
         }
 
+        //필요경험치 계산
         function calculateExpNeeded(curPos, curPercent, tarPos) {
             const { levelIdx: curLevelIdx, colorIdx: curColorIdx } = curPos;
             const { levelIdx: tarLevelIdx, colorIdx: tarColorIdx } = tarPos;
@@ -167,6 +169,7 @@
 
         const neededExpSpan = document.getElementById('requiredExperience');
 
+        //입력 시 실시간 업데이트
         function updateExpNeeded() {
             const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
             const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
@@ -189,6 +192,7 @@
             const selBLvlText = sel_B_Lvl.options[sel_B_Lvl.selectedIndex].text;
             const selAPer = sel_A_Per.value;
 
+            //대략적인 값으로 표시
             function koUnits(num) {
                 const units = [
                     { value: 1e8, label: '억' },
