@@ -229,6 +229,13 @@
             font-style: normal;
         }
 
+        @font-face {
+    font-family: 'Galmuri14';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri14.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
         @media (max-width: 767px) {
             h1 {
                 font-size: 25px;
@@ -270,7 +277,7 @@
         }
 
         * {
-            font-family: 'Dovemayo_gothic';
+            font-family: 'Galmuri14';
         }
 
         h1 {
@@ -286,9 +293,18 @@
 
         select,
         input {
-            font-size: 15px;
+            font-size: 12px;
             border-radius: 100px;
             padding: 5px;
+            border-color: gray;
+        }
+
+        input {
+            outline: none;
+        }
+
+        div {
+            font-size: 13px;
         }
 
         .cul {
