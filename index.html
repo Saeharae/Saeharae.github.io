@@ -16,13 +16,13 @@
             <div class="cul">
                 <div id="cul">현재 레벨</div>
                 <select name="색상" id="selA">
-                    <option value="a_red">빨간색</option>
-                    <option value="a_orange">주황색</option>
-                    <option value="a_yellow">노란색</option>
-                    <option value="a_green">초록색</option>
-                    <option value="a_blue">파란색</option>
-                    <option value="a_darkblue">남색</option>
-                    <option value="a_purple">보라색</option>
+                    <option class="red" value="a_red">빨간색</option>
+                    <option class="orange" value="a_orange">주황색</option>
+                    <option class="yellow" value="a_yellow">노란색</option>
+                    <option class="green" value="a_green">초록색</option>
+                    <option class="blue" value="a_blue">파란색</option>
+                    <option class="darkblue" value="a_darkblue">남색</option>
+                    <option class="purple" value="a_purple">보라색</option>
                 </select>
                 <select name="레벨" id="selALvl">
                     <option value="a1">병아리</option>
@@ -49,13 +49,13 @@
             <div class="tal">
                 <div id="tal">목표 레벨</div>
                 <select name="색상" id="selB">
-                    <option value="b_red">빨간색</option>
-                    <option value="b_orange">주황색</option>
-                    <option value="b_yellow">노란색</option>
-                    <option value="b_green">초록색</option>
-                    <option value="b_blue">파란색</option>
-                    <option value="b_darkblue">남색</option>
-                    <option value="b_purple">보라색</option>
+                    <option class="red" value="b_red">빨간색</option>
+                    <option class="orange" value="b_orange">주황색</option>
+                    <option class="yellow" value="b_yellow">노란색</option>
+                    <option class="green" value="b_green">초록색</option>
+                    <option class="blue" value="b_blue">파란색</option>
+                    <option class="darkblue" value="b_darkblue">남색</option>
+                    <option class="purple" value="b_purple">보라색</option>
                 </select>
                 <select name="레벨" id="selBLvl">
                     <option value="b1">병아리</option>
@@ -263,15 +263,46 @@
         }
 
         .hero {
-            color: red;
+            background-color: red;
+            color: #fff;
         }
 
         .grand {
-            color: #4169E1;
+            background-color: #4169E1;
+            color: #fff;
         }
 
         .eternal {
-            color: #47C83E
+            background-color: #47C83E;
+            color: #fff;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .orange {
+            color: orange;
+        }
+
+        .yellow {
+            color: gold;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .darkblue {
+            color: darkblue;
+        }
+
+        .purple {
+            color: purple;
         }
 
         .mains {
