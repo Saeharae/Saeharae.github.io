@@ -11,7 +11,7 @@
     <!--React나 Next로 만들면 쉽기야 하겠는데 그러면 동적웹페이지 호스팅을 못해서 그냥 깡 html로 만듦..-->
     <div class="mains">
         <div class="main">
-            <h1>📈 테일즈런너 레벨업 계산기 📈</h1>
+            <h1>테일즈런너 레벨업 계산기</h1>
             <h3 style="color: #909090;">만든놈: 사큐</h3>
             <div class="cul">
                 <div id="cul">현재 레벨</div>
@@ -127,7 +127,7 @@
             a_purple: 6,
             b_purple: 6
         };
-        
+
         //선택한 레벨을 숫자로 변환
         function calculateCurLvl(colorValue, lvlValue) {
             const colorIdx = colorIndex[colorValue];
@@ -230,12 +230,51 @@
             font-style: normal;
         }
 
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 25px;
+            }
+            
+            .main {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .main {
+                width: 60%;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .main {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            h1 {
+                font-size: 35px;
+            }
+
+            .main {
+                width: 40%;
+            }
+        }
+
         * {
             font-family: 'Dovemayo_gothic';
         }
 
         h1 {
-            font-size: 35px;
             text-align: center;
         }
 
@@ -253,7 +292,7 @@
         input {
             font-size: 15px;
             border-radius: 100px;
-            padding: 3px;
+            padding: 5px;
         }
 
         .cul {
@@ -323,7 +362,6 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40%;
         }
     </style>
 </body>
