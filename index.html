@@ -178,7 +178,7 @@
             document.getElementById("NextLvlBtn").addEventListener("click", nextLvlAuto);
 
             if (curPos === null || tarPos === null || isNaN(curPercent)) {
-                neededExpSpan.textContent = "입력값이 잘못되었습니다.";
+                neededExpSpan.textContent = "퍼센트를 입력해주세요!";
                 return;
             }
 
@@ -247,7 +247,7 @@
                 const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
 
                 if (curPos === null || tarPos === null || isNaN(selAPer)) {
-                    neededExpSpan.textContent = "입력값이 잘못되었습니다.";
+                    neededExpSpan.textContent = "퍼센트를 입력해주세요!";
                     return;
                 }
 
