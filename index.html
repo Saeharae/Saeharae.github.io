@@ -245,17 +245,8 @@
                 const selBLvlText = sel_B_Lvl.options[sel_B_Lvl.selectedIndex].text;
                 const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
                 const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
-
-                if (curPos === null || tarPos === null || isNaN(selAPer)) {
-                    neededExpSpan.textContent = "퍼센트를 입력해주세요!";
-                    return;
-                }
-
+                
                 const expNeeded = calculateExpNeeded(curPos, selAPer, tarPos);
-                if (expNeeded === null) {
-                    neededExpSpan.textContent = "0부터 99.99까지의 수를 입력해주세요!";
-                    return;
-                }
                 neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
             }
             neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
