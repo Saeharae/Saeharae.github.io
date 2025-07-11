@@ -76,10 +76,11 @@
                     <option class="eternal" value="b17">크로노스윙부츠</option>
                     <option class="eternal" value="b18">인페르노윙부츠</option>
                 </select>
+                <button id="NextLvlBtn">다음 레벨까지</button>
             </div>
             <br>
             <div id="requiredExperience"></div>
-            <div style="font-size: 10px;">(C) 2025. 사큐 All rights reserved.</div>
+            <div style="font-size: 10px;">저작권 (C) 2025. [사큐] 모든 권리 보유.</div>
         </div>
     </div>
 
@@ -130,7 +131,7 @@
         //선택한 레벨을 숫자로 변환
         function calculateCurLvl(colorValue, lvlValue) {
             const colorIdx = colorIndex[colorValue];
-            const lvlNum = parseInt(lvlValue.replace(/[ab]/g, ''), 10);
+            const lvlNum = parseInt(String(lvlValue).replace(/[ab]/g, ''), 10);
             if (isNaN(colorIdx) || isNaN(lvlNum)) return null;
 
             return { levelIdx: lvlNum - 1, colorIdx };
@@ -174,6 +175,8 @@
             const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
             const curPercent = parseFloat(sel_A_Per.value);
 
+            document.getElementById("NextLvlBtn").addEventListener("click", nextLvlAuto);
+
             if (curPos === null || tarPos === null || isNaN(curPercent)) {
                 neededExpSpan.textContent = "입력값이 잘못되었습니다.";
                 return;
@@ -208,6 +211,54 @@
                 return `약 ${num.toLocaleString()}`;
             }
 
+            //다음 레벨까지 버튼 클릭시 실행하는 함수
+            function nextLvlAuto() {
+                const result = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
+
+                if (!result) return;
+
+                const { levelIdx, colorIdx } = result;
+
+                const newColorIdx = colorIdx + 1;
+                if (newColorIdx == 7) {
+                    sel_B_Lvl.selectedIndex = levelIdx + 1;
+                    sel_B_Color.selectedIndex = colorIdx - 6;
+                } else {
+                    sel_B_Lvl.selectedIndex = levelIdx;
+                    sel_B_Color.selectedIndex = newColorIdx;
+                }
+
+                if (
+                    sel_B_Color.selectedIndex < 0 ||
+                    sel_B_Color.selectedIndex >= sel_B_Color.options.length ||
+                    sel_B_Lvl.selectedIndex < 0 ||
+                    sel_B_Lvl.selectedIndex >= sel_B_Lvl.options.length
+                ) {
+                    neededExpSpan.textContent = "최대 레벨입니다!";
+                    return;
+                }
+
+                const selAText = sel_A_Color.options[sel_A_Color.selectedIndex].text;
+                const selALvlText = sel_A_Lvl.options[sel_A_Lvl.selectedIndex].text;
+                const selAPer = sel_A_Per.value;
+                const selBText = sel_B_Color.options[sel_B_Color.selectedIndex].text;
+                const selBLvlText = sel_B_Lvl.options[sel_B_Lvl.selectedIndex].text;
+                const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
+                const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
+                const curPercent = parseFloat(sel_A_Per.value);
+
+                if (curPos === null || tarPos === null || isNaN(curPercent)) {
+                    neededExpSpan.textContent = "입력값이 잘못되었습니다.";
+                    return;
+                }
+
+                const expNeeded = calculateExpNeeded(curPos, curPercent, tarPos);
+                if (expNeeded === null) {
+                    neededExpSpan.textContent = "0부터 99.99까지의 수를 입력해주세요!";
+                    return;
+                }
+                neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
+            }
             neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
         }
 
@@ -223,18 +274,11 @@
     </script>
     <style>
         @font-face {
-            font-family: 'Dovemayo_gothic';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-family: 'Galmuri14';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri14.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
-
-        @font-face {
-    font-family: 'Galmuri14';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri14.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
 
         @media (max-width: 767px) {
             h1 {
@@ -297,6 +341,16 @@
             border-radius: 100px;
             padding: 5px;
             border-color: gray;
+            background-color: white;
+        }
+
+        button {
+            font-size: 12px;
+            border-radius: 100px;
+            padding: 7px;
+            background-color: #ced4da;
+            border: none;
+            cursor: pointer;
         }
 
         div {
