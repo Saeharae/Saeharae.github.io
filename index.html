@@ -240,19 +240,18 @@
 
                 const selAText = sel_A_Color.options[sel_A_Color.selectedIndex].text;
                 const selALvlText = sel_A_Lvl.options[sel_A_Lvl.selectedIndex].text;
-                const selAPer = sel_A_Per.value;
+                const selAPer = parseFloat(sel_A_Per.value);
                 const selBText = sel_B_Color.options[sel_B_Color.selectedIndex].text;
                 const selBLvlText = sel_B_Lvl.options[sel_B_Lvl.selectedIndex].text;
                 const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
                 const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
-                const curPercent = parseFloat(sel_A_Per.value);
 
-                if (curPos === null || tarPos === null || isNaN(curPercent)) {
+                if (curPos === null || tarPos === null || isNaN(selAPer)) {
                     neededExpSpan.textContent = "입력값이 잘못되었습니다.";
                     return;
                 }
 
-                const expNeeded = calculateExpNeeded(curPos, curPercent, tarPos);
+                const expNeeded = calculateExpNeeded(curPos, selAPer, tarPos);
                 if (expNeeded === null) {
                     neededExpSpan.textContent = "0부터 99.99까지의 수를 입력해주세요!";
                     return;
