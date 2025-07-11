@@ -80,7 +80,7 @@
             </div>
             <br>
             <div id="requiredExperience"></div>
-            <div style="font-size: 10px;">Ver 1.1</div>
+            <div style="font-size: 10px;">Ver 1.11</div>
             <div style="font-size: 10px;">저작권 (C) 2025. [사큐] 모든 권리 보유.</div>
         </div>
     </div>
@@ -175,17 +175,20 @@
             const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
             const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
             const curPercent = parseFloat(sel_A_Per.value);
+            neededExpSpan.style.color = 'black';
 
             document.getElementById("NextLvlBtn").addEventListener("click", nextLvlAuto);
 
             if (curPos === null || tarPos === null || isNaN(curPercent)) {
                 neededExpSpan.textContent = "퍼센트를 입력해주세요!";
+                neededExpSpan.style.color = 'red';
                 return;
             }
 
             const expNeeded = calculateExpNeeded(curPos, curPercent, tarPos);
             if (expNeeded === null) {
                 neededExpSpan.textContent = "0부터 99.99까지의 수를 입력해주세요!";
+                neededExpSpan.style.color = 'red';
                 return;
             }
 
@@ -236,6 +239,7 @@
                     sel_B_Lvl.selectedIndex >= sel_B_Lvl.options.length
                 ) {
                     neededExpSpan.textContent = "최대 레벨입니다!";
+                    neededExpSpan.style.color = 'orange';
                     return;
                 }
 
@@ -246,6 +250,12 @@
                 const selBLvlText = sel_B_Lvl.options[sel_B_Lvl.selectedIndex].text;
                 const curPos = calculateCurLvl(sel_A_Color.value, sel_A_Lvl.value);
                 const tarPos = calculateCurLvl(sel_B_Color.value, sel_B_Lvl.value);
+
+                if(isNaN(selAPer) || selAPer == undefined) {
+                    neededExpSpan.textContent = '퍼센트를 입력해주세요!'
+                    neededExpSpan.style.color = 'red';
+                    return;
+                }
                 
                 const expNeeded = calculateExpNeeded(curPos, selAPer, tarPos);
                 neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
