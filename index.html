@@ -79,6 +79,7 @@
                 <button id="NextLvlBtn">다음 레벨까지</button>
             </div>
             <br>
+            <div id="exp">필요 경험치</div>
             <div id="requiredExperience"></div>
             <br>
             <div style="font-size: 10px;">Ver 1.2</div>
@@ -259,9 +260,9 @@
                 }
                 
                 const expNeeded = calculateExpNeeded(curPos, selAPer, tarPos);
-                neededExpSpan.textContent = `현재 레벨: ${selAText} ${selALvlText} ${selAPer}%\n목표 레벨: ${selBText} ${selBLvlText}\n필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
+                neededExpSpan.textContent = `${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
             }
-            neededExpSpan.textContent = `현재 레벨: ${selAText} ${selALvlText} ${selAPer}%\n목표 레벨: ${selBText} ${selBLvlText}\n필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
+            neededExpSpan.textContent = `${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
         }
 
         sel_A_Color.addEventListener('change', updateExpNeeded);
@@ -398,15 +399,10 @@
             white-space: pre-wrap;
             border: 1px gray solid;
             border-radius: 15px;
-            padding: 5px;
+            padding: 7px;
         }
 
-        .cul {
-            margin-top: 10px;
-            font-size: 17px;
-        }
-
-        .tal {
+        .cul, .tal, .exp {
             margin-top: 10px;
             font-size: 17px;
         }
