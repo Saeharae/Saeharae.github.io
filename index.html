@@ -80,7 +80,8 @@
             </div>
             <br>
             <div id="requiredExperience"></div>
-            <div style="font-size: 10px;">Ver 1.12</div>
+            <br>
+            <div style="font-size: 10px;">Ver 1.2</div>
             <div style="font-size: 10px;">저작권 (C) 2025. [묘네] 모든 권리 보유.</div>
         </div>
     </div>
@@ -258,9 +259,9 @@
                 }
                 
                 const expNeeded = calculateExpNeeded(curPos, selAPer, tarPos);
-                neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
+                neededExpSpan.textContent = `현재 레벨: ${selAText} ${selALvlText} ${selAPer}%\n목표 레벨: ${selBText} ${selBLvlText}\n필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
             }
-            neededExpSpan.textContent = `${selAText} ${selALvlText} ${selAPer}% 에서 ${selBText} ${selBLvlText} 까지는 ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)}) 경험치가 필요해요!`;
+            neededExpSpan.textContent = `현재 레벨: ${selAText} ${selALvlText} ${selAPer}%\n목표 레벨: ${selBText} ${selBLvlText}\n필요 경험치: ${Number(expNeeded.toFixed(2)).toLocaleString()}(${koUnits(expNeeded)})`;
         }
 
         sel_A_Color.addEventListener('change', updateExpNeeded);
@@ -271,6 +272,35 @@
         sel_B_Lvl.addEventListener('change', updateExpNeeded);
 
         updateExpNeeded();
+
+        //레벨 저장(제작 보류)
+        /* window.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('lvlPer');
+    const selA = document.getElementById('selA');
+    const selB = document.getElementById('selB');
+
+    function updateData(key, value) {
+        const saved = JSON.parse(localStorage.getItem('formState')) || {};
+        saved[key] = value;
+        localStorage.setItem('formState', JSON.stringify(saved));
+        console.log('저장됨:', saved);
+    }
+
+    input.addEventListener('input', () => updateData('lvlPer', input.value));
+    selA.addEventListener('change', () => updateData('selA', selA.value));
+    selALvl.addEventListener('change', () => updateData('selALvl', selALvl.value));
+    selB.addEventListener('change', () => updateData('selB', selB.value));
+    selBLvl.addEventListener('change', () => updateData('selBLvl', selBLvl.value));
+
+    // 페이지 접속 시 복원
+    const saved = JSON.parse(localStorage.getItem('formState')) || {};
+    input.value = saved.lvlPer || '';
+    selA.value = saved.selA || '';
+    selALvl.value = saved.selALvl || '';
+    selB.value = saved.selB || '';
+    selBLvl.value = saved.selBLvl || '';
+        });
+        */
 
     </script>
     <style>
@@ -362,6 +392,13 @@
 
         div {
             font-size: 13px;
+        }
+
+        #requiredExperience {
+            white-space: pre-wrap;
+            border: 1px gray solid;
+            border-radius: 15px;
+            padding: 5px;
         }
 
         .cul {
